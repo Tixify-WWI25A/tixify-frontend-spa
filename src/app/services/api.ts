@@ -121,6 +121,8 @@ export class ApiService {
     );
   }
   searchAddress(query: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/api/geocode?q=${encodeURIComponent(query)}`);
+    return this.http.get<any[]>(`${this.apiUrl}/api/geocode?q=${encodeURIComponent(query)}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 }
