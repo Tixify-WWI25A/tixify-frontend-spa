@@ -1,6 +1,5 @@
 name: SPA auf GitHub Pages veröffentlichen
 
-
 on:
   push:
     branches: [main]
