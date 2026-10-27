@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Hinweis: Studienprojekt */
+.study-banner {
+  background: #2a1f5c;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  padding: 8px 16px;
+}
