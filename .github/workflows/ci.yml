@@ -1,0 +1,34 @@
+# Mit KI erstellt (KI-Log Nr. 26): Unit-Tests der Admin-SPA bei jedem Push und Pull Request.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Unit-Tests mit Abdeckung
+        run: npx ng test --watch=false --coverage
+
+      - name: Abdeckungsbericht speichern
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/

@@ -13,28 +13,14 @@
     <form (ngSubmit)="onLogin()" class="login-form">
       <div class="form-group">
         <label for="email">E-Mail-Adresse</label>
-        <input 
-          id="email" 
-          type="email" 
-          [(ngModel)]="email" 
-          name="email" 
-          required 
-          placeholder="admin@tixify.de"
-          [disabled]="isLoading()"
-        >
+        <input id="email" type="email" [(ngModel)]="email" name="email" required placeholder="admin@tixify.de"
+          [disabled]="isLoading()">
       </div>
 
       <div class="form-group">
         <label for="password">Passwort</label>
-        <input 
-          id="password" 
-          type="password" 
-          [(ngModel)]="password" 
-          name="password" 
-          required 
-          placeholder="••••••••"
-          [disabled]="isLoading()"
-        >
+        <input id="password" type="password" [(ngModel)]="password" name="password" required placeholder="••••••••"
+          [disabled]="isLoading()">
       </div>
 
       <button type="submit" class="btn-submit" [disabled]="isLoading()">
@@ -43,7 +29,7 @@
       </button>
 
       <div class="footer-link">
-        <a href="http://localhost:3000">← Zurück zum Kunden-Ticketshop (MPA)</a>
+        <a href="https://tixify-wwi25a.github.io/Tixify_frontend/index.html">← Zurück zum Kunden-Ticketshop (MPA)</a>
       </div>
     </form>
   </div>
