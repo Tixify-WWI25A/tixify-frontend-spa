@@ -1,3 +1,4 @@
+// Mit KI erstellt (Gemini, KI-Log W3, 13.10.), vom Team getestet und bewertet.
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -14,7 +15,7 @@ export interface CurrentUser {
 export class AuthService {
   currentUser = signal<CurrentUser | null>(this.getStoredUser());
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   private getStoredUser(): CurrentUser | null {
     const raw = localStorage.getItem('user');

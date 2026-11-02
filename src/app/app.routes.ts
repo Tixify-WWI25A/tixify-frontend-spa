@@ -1,3 +1,4 @@
+// Erstfassung mit KI erstellt (Gemini, KI-Log W3, 13.10.). Weiterentwickelt mit KI (KI-Log W6), jeweils vom Team getestet und bewertet: Check-in entfernt (Robert, 15.10.).
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth-guard'; // bzw. './guards/auth' je nach Dateiname
 

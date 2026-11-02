@@ -1,3 +1,4 @@
+// Mit KI erstellt (Gemini, KI-Log W3, 13.10.), vom Team getestet und bewertet.
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';

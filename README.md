@@ -1,5 +1,18 @@
 # TixifyAdminSpa
 
+## KI-Kennzeichnung
+
+Die Admin-SPA ist mit KI entstanden: Die Erstfassung (Seiten, Dienste, Guard, Styles) wurde am 13.10. mit Gemini erstellt (KI-Log W3), spätere Erweiterungen wie die Adresssuche, das Entfernen des Check-ins, der Admin-Login und der Studienhinweis ebenfalls mit KI (KI-Log W6). Das Team hat jede Änderung im Browser getestet und den Code bewertet, bevor sie übernommen wurde. Die Unit-Tests und die CI (`.github/workflows/ci.yml`) wurden mit Claude erstellt (KI-Log Nr. 26). Jede Datei nennt im Kopfkommentar, was mit KI entstanden ist und welche Änderungen danach folgten.
+
+## Tests
+
+```bash
+npm ci
+npm test -- --watch=false   # 44 Unit-Tests (Vitest), Node 22.22.3 oder neuer
+npm run test:ci             # zusätzlich mit Abdeckungsbericht in coverage/
+```
+
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.2.
 
 ## Development server

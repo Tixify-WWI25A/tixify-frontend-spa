@@ -1,3 +1,4 @@
+// Mit KI erstellt (Gemini, KI-Log W3, 13.10.), vom Team getestet und bewertet.
 import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';

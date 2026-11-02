@@ -1,3 +1,4 @@
+// Erstfassung mit KI erstellt (Gemini, KI-Log W3, 13.10.). Weiterentwickelt mit KI (KI-Log W6), jeweils vom Team getestet und bewertet: Adresssuche über den Backend-Proxy (Manuel, 14.10.); API-URL statt localhost für die Adresssuche (Manuel, 15.10.).
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

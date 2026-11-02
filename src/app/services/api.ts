@@ -1,3 +1,4 @@
+// Erstfassung mit KI erstellt (Gemini, KI-Log W3, 13.10.). Weiterentwickelt mit KI (KI-Log W6), jeweils vom Team getestet und bewertet: API-Pfad nach dem Deployment korrigiert (Robert, 14.10.); Check-in entfernt (Robert, 15.10.); API-URL für die Adresssuche (Manuel, 15.10.); Admin-Login angebunden (Robert, 26.10.).
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';

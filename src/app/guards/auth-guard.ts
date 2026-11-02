@@ -1,3 +1,4 @@
+// Mit KI erstellt (Gemini, KI-Log W3, 13.10.), vom Team getestet und bewertet.
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth';

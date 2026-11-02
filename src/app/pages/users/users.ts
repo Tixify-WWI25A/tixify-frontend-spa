@@ -1,4 +1,5 @@
-﻿import { Component, inject, OnInit, signal, computed } from '@angular/core';
+// Mit KI erstellt (Gemini, KI-Log W3, 13.10.), vom Team getestet und bewertet.
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService, UserItem } from '../../services/api';
