@@ -1,10 +1,11 @@
-// Erstfassung mit KI erstellt (Gemini, KI-Log W3, 13.10.). Weiterentwickelt mit KI (KI-Log W6), jeweils vom Team getestet und bewertet: API-Pfad nach dem Deployment korrigiert (Robert, 14.10.).
+// Erstfassung mit KI erstellt (Gemini, KI-Log W3, 13.10.). Weiterentwickelt mit KI (KI-Log W6), jeweils vom Team getestet und bewertet: API-Pfad nach dem Deployment korrigiert (Robert, 14.10.); API-Adresse aus config.ts (Claude, KI-Log Nr. 30, 05.11.).
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../services/auth';
+import { API_URL } from '../../config';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ export class Login {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    this.http.post<any>('https://tixify-c7a903638236.herokuapp.com/api/auth/login', {
+    this.http.post<any>(`${API_URL}/api/auth/login`, {
       email: this.email,
       password: this.password
     }).subscribe({
