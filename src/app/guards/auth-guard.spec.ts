@@ -1,4 +1,4 @@
-// Mit KI erstellt (KI-Log Nr. 26): Nur Admins und Veranstalter kommen in die Verwaltung.
+// Mit KI erstellt (KI-Log Nr. 62): Nur Admins und Veranstalter kommen in die Verwaltung.
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { authGuard } from './auth-guard';

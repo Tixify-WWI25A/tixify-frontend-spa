@@ -1,4 +1,4 @@
-// Mit KI erstellt (KI-Log Nr. 26): Sitzung speichern, Rollen erkennen, Abmelden.
+// Mit KI erstellt (KI-Log Nr. 62): Sitzung speichern, Rollen erkennen, Abmelden.
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { AuthService } from './auth';

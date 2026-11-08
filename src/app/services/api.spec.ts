@@ -1,4 +1,4 @@
-// Mit KI erstellt (KI-Log Nr. 26): Pfade, Methoden und Token der API-Aufrufe.
+// Mit KI erstellt (KI-Log Nr. 62): Pfade, Methoden und Token der API-Aufrufe.
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';

@@ -1,4 +1,4 @@
-// Mit KI erstellt (KI-Log Nr. 26): Benutzerverwaltung (Suche, Rollen, Löschen).
+// Mit KI erstellt (KI-Log Nr. 62): Benutzerverwaltung (Suche, Rollen, Löschen).
 import { TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { Users } from './users';

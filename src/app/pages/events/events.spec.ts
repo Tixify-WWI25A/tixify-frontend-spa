@@ -1,4 +1,4 @@
-// Mit KI erstellt (KI-Log Nr. 26): Laden, Suche, Sortierung, Seiten und Formular der Eventverwaltung.
+// Mit KI erstellt (KI-Log Nr. 62): Laden, Suche, Sortierung, Seiten und Formular der Eventverwaltung.
 import { TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { Events, EventData } from './events';

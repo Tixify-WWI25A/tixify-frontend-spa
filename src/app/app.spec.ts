@@ -1,4 +1,4 @@
-// Mit KI überarbeitet (KI-Log Nr. 26): ersetzt den Standardtest des Angular-Grundgerüsts.
+// Mit KI überarbeitet (KI-Log Nr. 62): ersetzt den Standardtest des Angular-Grundgerüsts.
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { App } from './app';

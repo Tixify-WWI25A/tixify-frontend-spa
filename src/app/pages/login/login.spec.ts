@@ -1,4 +1,4 @@
-// Mit KI erstellt (KI-Log Nr. 26): Anmeldung nur für Admins und Veranstalter.
+// Mit KI erstellt (KI-Log Nr. 62): Anmeldung nur für Admins und Veranstalter.
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';

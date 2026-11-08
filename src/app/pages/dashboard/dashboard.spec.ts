@@ -1,4 +1,4 @@
-// Mit KI erstellt (KI-Log Nr. 26): Kennzahlen des Dashboards.
+// Mit KI erstellt (KI-Log Nr. 62): Kennzahlen des Dashboards.
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';

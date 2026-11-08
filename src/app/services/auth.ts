@@ -1,4 +1,4 @@
-// Mit KI erstellt (Gemini, KI-Log W3, 13.10.), vom Team getestet und bewertet.
+// Mit KI erstellt (Gemini, KI-Log Nr. 17, 13.10.), vom Team getestet und bewertet.
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
