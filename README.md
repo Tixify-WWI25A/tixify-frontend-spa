@@ -1,73 +1,62 @@
-# Tixify MPA (Kundenshop)
+# Tixify Admin-SPA
 
-**Der Touchpoint für Kunden:** Veranstaltungen suchen, Tickets kaufen, mit PayPal (Sandbox) bezahlen und die Tickets mit QR-Code abrufen. Gebaut als **Multi-Page-Application** mit HTML, CSS und JavaScript ohne Framework.
+**Der Touchpoint für Administratoren:** Events anlegen, ändern und löschen, den Bestand pflegen und Nutzerrollen verwalten. Gebaut als **Single-Page-Application** mit Angular.
 
-Live: https://tixify-wwi25a.github.io/Tixify_frontend/
-Studienprojekt (DHBW Mosbach, WWI25A): Es fließt kein echtes Geld, bezahlt wird in der PayPal-Sandbox.
+Live: https://tixify-wwi25a.github.io/tixify-frontend-spa/
+Zugang nur mit einem Konto mit der Rolle `admin`. Studienprojekt (DHBW Mosbach, WWI25A).
 
 | Repo | Aufgabe |
 |---|---|
-| **Tixify_frontend** | **MPA für Kunden (dieses Repo)** |
-| tixify-frontend-spa | Admin-SPA (Angular) |
+| Tixify_frontend | MPA für Kunden |
+| **tixify-frontend-spa** | **Admin-SPA (dieses Repo)** |
 | Tixify_backend | gateway (BFF) und identity: einzige Adresse beider Frontends |
 | tixify-catalog | Events, GraphQL, Reservierungen |
 | tixify-orders | Warenkorb, PayPal, Bestellungen, Mails |
 
-## Seiten
+## SPA-Prinzip
 
-Jede Ansicht ist eine eigene HTML-Seite mit eigenem JavaScript-Modul. Ein Seitenwechsel lädt die Seite neu (MPA-Prinzip).
+Es gibt nur eine `index.html`. Der Angular-Router tauscht beim Navigieren die Komponente aus, der Browser lädt die Seite nicht neu. Die Daten holt die App über `HttpClient` aus der API des gateway (Adresse an einer Stelle in `src/app/config.ts`).
 
-| Seite | Skript | Inhalt |
+| Route | Komponente | Inhalt |
 |---|---|---|
-| `index.html` | `js/home.js` | Startseite: Suche, Filter (Kategorie, Ort, Datum, Preis), Sortierung, 6 Events pro Seite |
-| `detail.html` | `js/detail.js` | Eventdetails mit Karte, Mengenauswahl (höchstens 5 Tickets pro Kunde und Event), in den Warenkorb |
-| `login.html` | `js/login.js` | Anmelden und Registrieren |
-| `checkout.html` | `js/checkout.js` | Warenkorb, Übersicht, Bezahlen mit dem PayPal JavaScript SDK |
-| `bookings.html` | `js/bookings.js` | „Meine Buchungen“ mit einem QR-Code pro Ticket (lokal im Browser erzeugt) |
+| `/login` | `pages/login` | Anmeldung (nur Admins kommen weiter) |
+| `/dashboard` | `pages/dashboard` | Kennzahlen: Anzahl Events, Gesamtbestand, Warenwert, Durchschnittspreis, knappe Events, Kategorien |
+| `/events` | `pages/events` | Eventtabelle mit Suche, Sortierung und Seiten; anlegen, ändern, löschen, Bestand direkt in der Tabelle ändern, Adresssuche mit Karte |
+| `/users` | `pages/users` | Nutzerliste, Rolle ändern, Nutzer löschen |
 
-Gemeinsam genutzt:
+Alle Seiten werden erst bei Bedarf geladen (`loadComponent`). Der **Route Guard** (`guards/auth-guard.ts`) lässt nur angemeldete Nutzer mit der Rolle `admin` (oder `organizer`) auf die Seiten. Er dient der Bedienung; die eigentliche Rechteprüfung macht das Backend bei jeder Anfrage.
 
-- `js/api.js`: `apiRequest()` ruft das gateway auf (`https://tixify-c7a903638236.herokuapp.com/api`), hängt das JWT als `Authorization: Bearer …` an und wirft bei Fehlern die Meldung des Backends. Abgelaufene Tokens werden gelöscht.
-- `js/common.js`: Kopfbereich, Toasts, `escapeHtml`, `safeUrl` und `cssUrl` (Schutz vor XSS: Daten aus der API werden nie ungeprüft als HTML eingefügt).
-- `css/styles.css`: ein Stylesheet für alle Seiten, Farbvariablen für helles und dunkles Farbschema.
+## REST und GraphQL
 
-## Kauf mit PayPal
+`services/api.ts` bündelt alle Aufrufe:
 
-`checkout.js` nutzt drei Callbacks des PayPal SDK:
+| Funktion | Schnittstelle |
+|---|---|
+| Eventtabelle laden | GraphQL `query { events { … } }` (bei Fehler Rückfall auf `GET /api/events`) |
+| Bestand ändern | GraphQL `mutation updateStock(eventId, stock)` |
+| Event anlegen, ändern, löschen | REST `POST`, `PATCH`, `DELETE /api/events` |
+| Adresssuche | REST `GET /api/geocode?q=…` (Nominatim über das Backend) |
+| Nutzer laden, Rolle ändern, löschen | REST `GET /api/users`, `PATCH /api/users/:id/role`, `DELETE /api/users/:id` |
+| Dashboard | REST `GET /api/events` |
 
-| Callback | Aufruf an das Backend | Ergebnis |
-|---|---|---|
-| `createOrder` | `POST /api/orders` | orders reserviert die Tickets im catalog (15 Min.) und legt die PayPal-Order mit dem Betrag aus dem catalog an |
-| `onApprove` | `POST /api/orders/:id/capture` | Zahlung einziehen, Tickets erzeugen, Weiterleitung zu „Meine Buchungen“ |
-| `onCancel` | `POST /api/orders/:id/cancel` | Tickets sofort wieder frei, Warenkorb bleibt |
+Der Zustand liegt in Angular-Signals; `computed()` berechnet gefilterte Listen und Kennzahlen neu, sobald sich ein Signal ändert. Der angemeldete Nutzer liegt im `AuthService`, das Token im `localStorage`.
 
-Der Betrag kommt immer aus dem Backend, nie aus dem Browser.
+## Lokal starten
 
-## Responsiv
-
-Umbruchpunkte bei 860 px und 600 px. Unter 600 px gibt es einen Menü-Button, Tabellen werden zu Karten, alle Bedienelemente sind mindestens 44 px hoch.
+```bash
+npm ci
+npx ng serve          # http://localhost:4200
+```
 
 ## Tests
 
-Browser-Tests mit Playwright (13 Tests):
-
-| Datei | Prüft |
-|---|---|
-| `tests/xss.spec.js` | Event mit Schadcode im Titel wird als Text angezeigt, nichts wird ausgeführt |
-| `tests/mobile.spec.js` | Darstellung bei 375 px ohne horizontales Scrollen |
-| `tests/checkout.spec.js` | Bezahlen und Abbrechen im Checkout (Backend und PayPal simuliert) |
-| `tests/nfa.spec.js` | Ladezeit der Eventliste live (Grenze 1,5 s) |
-
 ```bash
-npm install
-npx playwright install chromium
-npm test
+npm test -- --watch=false   # 44 Unit-Tests (Vitest), Node 22 oder neuer
+npm run test:ci             # zusätzlich mit Abdeckungsbericht in coverage/
 ```
 
-## Deployment
+Die CI (`.github/workflows/ci.yml`) führt die Tests bei jedem Push aus. `.github/workflows/pages.yaml` baut die App und veröffentlicht sie auf GitHub Pages.
 
-`.github/workflows/pages.yml` veröffentlicht die Seiten bei jedem Push auf `main` auf GitHub Pages. `.github/workflows/nfa.yml` misst danach die Ladezeit gegen die Live-Seite.
+## KI-Kennzeichnung
 
-## KI-Einsatz
-
-Die Erstfassungen der Seiten wurden mit Gemini erstellt (KI-Log Nr. 10, 13, 15, 16, 25), die Überarbeitung mit XSS-Schutz, mobiler Ansicht und neuer Kasse mit Claude (Nr. 48). Die Höchstmenge und „Meine Buchungen“ entstanden mit Gemini (Nr. 50), die Tests mit Claude (Nr. 52, 63, 68). Das Team hat jede Änderung im Browser getestet und bewertet. Jede Datei nennt im Kopfkommentar die zugehörigen Nummern im KI-Log der Projektdokumentation.
+Die Admin-SPA ist mit KI entstanden: Die Erstfassung (Seiten, Dienste, Guard, Styles) wurde am 13.10. mit Gemini erstellt (KI-Log Nr. 17), spätere Erweiterungen wie die Adresssuche, das Entfernen des Check-ins, der Admin-Login und der Studienhinweis ebenfalls mit KI (KI-Log Nr. 18). Das Team hat jede Änderung im Browser getestet und den Code bewertet, bevor sie übernommen wurde. Die Unit-Tests und die CI (`.github/workflows/ci.yml`) wurden mit Claude erstellt (KI-Log Nr. 62). Jede Datei nennt im Kopfkommentar, was mit KI entstanden ist und welche Änderungen danach folgten.
