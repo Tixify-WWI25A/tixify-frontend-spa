@@ -1,4 +1,4 @@
-// Erstfassung mit KI erstellt (Gemini, KI-Log Nr. 17, 13.10.). Weiterentwickelt mit KI (KI-Log Nr. 18), jeweils vom Team getestet und bewertet: API-Pfad nach dem Deployment korrigiert (Robert, 14.10.); API-Adresse aus config.ts (Claude, KI-Log Nr. 68, 05.11.).
+// Erstfassung mit KI erstellt (Gemini, KI-Log Nr. 17, 13.10.). Weiterentwickelt mit KI (KI-Log Nr. 18), jeweils vom Team getestet und bewertet: API-Pfad nach dem Deployment korrigiert (Robert, 14.10.); API-Adresse aus config.ts (Claude, KI-Log Nr. 70, 05.11.).
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
